@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AlgLink: Algorithmic Solutions for LinkedIn</title>
+    <style>
+      :root {
+        --primary: #0a66c2;
+        --secondary: #f5f5f5;
+        --accent: #28a745;
+        --text: #333;
+        --light: #fff;
+        --dark: #1d2226;
+        --border: #e0e0e0;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: var(--secondary);
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Montserrat", sans-serif;
+        color: var(--primary);
+        margin-top: 1.5em;
+      }
+      .header {
+        text-align: center;
+        padding: 40px 0;
+        background: linear-gradient(135deg, var(--primary) 0%, #004182 100%);
+        color: var(--light);
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .card {
+        background: var(--light);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin: 25px 0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid var(--border);
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .btn {
+        display: inline-block;
+        background: var(--primary);
+        color: var(--light);
+        padding: 12px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 15px 0;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95em;
+      }
+      .btn:hover {
+        background: #004182;
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        background: var(--accent);
+      }
+      .btn-secondary:hover {
+        background: #218838;
+      }
+      .algorithm-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        margin: 25px auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+      }
+      .caption {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        margin-top: -10px;
+        margin-bottom: 25px;
+        font-size: 0.9em;
+      }
+      .complexity {
+        background: #f8f9fa;
+        padding: 18px;
+        border-left: 4px solid var(--primary);
+        margin: 20px 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .complexity strong {
+        color: var(--primary);
+      }
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 35px 0;
+        padding: 15px 0;
+        background: var(--light);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+      .nav-links a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+      .nav-links a:hover {
+        background: rgba(10, 102, 194, 0.1);
+      }
+      footer {
+        text-align: center;
+        margin-top: 60px;
+        padding: 30px;
+        border-top: 1px solid var(--border);
+        color: #666;
+      }
+      .course-info {
+        background: var(--light);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+      .course-info dt {
+        font-weight: bold;
+        color: var(--primary);
+        margin-top: 10px;
+      }
+      .course-info dd {
+        margin-left: 20px;
+        margin-bottom: 8px;
+      }
+      blockquote {
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        background: var(--secondary);
+        margin: 30px 0;
+        font-style: italic;
+        color: #555;
+      }
+      .use-case-number {
+        background: var(--primary);
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+      .algorithm-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .challenge-box {
+        background: #fff8f8;
+        padding: 15px;
+        border-left: 4px solid #dc3545;
+        margin: 20px 0;
+        border-radius: 0 4px 4px 0;
+      }
+      .challenge-box strong {
+        color: #dc3545;
+      }
+      @media (max-width: 768px) {
+        body {
+          padding: 15px;
+        }
+        .card {
+          padding: 20px;
+        }
+        .header {
+          padding: 30px 15px;
+        }
+        .nav-links {
+          gap: 10px;
+        }
+        .nav-links a {
+          padding: 6px 12px;
+          font-size: 0.9em;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <h1 style="color: white">AlgLink: Algorithmic Solutions for LinkedIn</h1>
+      <p>
+        Applying Data Structures and Algorithms to Enhance Professional
+        Networking
+      </p>
+    </div>
+
+    <div class="nav-links">
+      <a href="#introduction"
+        ><i class="fas fa-info-circle"></i> Introduction</a
+      >
+      <a href="#need"><i class="fas fa-question-circle"></i> Why Portfolio</a>
+      <a href="#objectives"><i class="fas fa-bullseye"></i> Objectives</a>
+      <a href="#algorithms"
+        ><i class="fas fa-project-diagram"></i> DSA Applications</a
+      >
+      <a href="#learnings"><i class="fas fa-lightbulb"></i> Learnings</a>
+      <a href="#references"><i class="fas fa-book"></i> References</a>
+    </div>
+
+    <div class="course-info">
+      <dl>
+        <dt>Course Name</dt>
+        <dd>Algorithmic Problem Solving</dd>
+        <dt>Course Code</dt>
+        <dd>24ECSE309</dd>
+        <dt>Name</dt>
+        <dd>Prajwal Mallikarjun Ganeshanavar</dd>
+        <dt>SRN</dt>
+        <dd>01FE22BCS159</dd>
+        <dt>Course Instructor</dt>
+        <dd>Prakash Hegade</dd>
+        <dt>University</dt>
+        <dd>KLE Technological University, Hubballi</dd>
+        <dt>Portfolio Domain / Topic</dt>
+        <dd>LinkedIn</dd>
+      </dl>
+    </div>
+
+    <blockquote>
+      <i class="fas fa-quote-left" style="margin-right: 10px"></i>
+      The only constant in IT is <strong>change</strong>.
+      <i class="fas fa-quote-right" style="margin-left: 10px"></i>
+    </blockquote>
+
+    <h2 id="introduction">Introduction</h2>
+    <div class="card">
+      <p style="text-align: justify">
+        LinkedIn is a leading professional networking service, providing a
+        platform for professionals to connect, share, and grow their careers. In
+        today's data-driven world, the efficiency and effectiveness of social
+        networking services can be significantly enhanced through the strategic
+        application of data structures and algorithms. This portfolio project
+        delves into the core functionalities of LinkedIn's diverse services,
+        applying the theoretical knowledge and practical skills acquired from
+        the course Algorithmic Problem Solving (APS). By using advanced
+        algorithmic techniques and data structures, this project aims to propose
+        solutions to real-world business applications. From optimizing
+        connection recommendations for improved relevance to enhancing content
+        delivery for better engagement, the potential for enhancement is vast.
+      </p>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Introduction.png"
+        alt="LinkedIn Overview"
+        class="algorithm-img"
+      />
+      <p class="caption">Figure 1: LinkedIn Overview <a href="#ref1">[1]</a></p>
+      <p style="text-align: justify">
+        This portfolio showcases how algorithms can be applied within LinkedIn's
+        ecosystem. Each use case illustrates how specific DSA principles can
+        solve practical challenges faced by a social networking service like
+        LinkedIn, bridging the gap between theory and application. Explore the
+        use cases to see how DSA and Algorithmic Problem Solving techniques are
+        used to enhance performance, reliability, and efficiency in a real-world
+        context.
+      </p>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/market_analysis.jpg"
+        alt="Market Analysis of LinkedIn"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 2: Market Analysis of LinkedIn <a href="#ref2">[2]</a>
+      </p>
+    </div>
+
+    <h2 id="need">Why Portfolio</h2>
+    <div class="card">
+      <p style="text-align: justify">
+        The ever-evolving landscape of social networking services necessitates
+        continual improvements in service management and user experience.
+        LinkedIn, as a leading player in this industry, faces various
+        operational challenges that can be addressed through the strategic
+        application of data structures and algorithms. This portfolio is
+        essential for several reasons. Firstly, optimizing service efficiency is
+        crucial; efficient connection recommendations and content delivery can
+        maximize user engagement and satisfaction. By exploring advanced
+        algorithmic solutions, this portfolio aims to enhance these processes,
+        resulting in a more personalized and efficient service. Additionally,
+        the transition from theoretical knowledge to practical application is a
+        critical step in the learning process. This portfolio provides an
+        opportunity to apply concepts learned in Data Structures and Algorithms
+        (DSA) and Algorithmic Problem Solving (APS) courses to real-world
+        problems, thereby solidifying understanding and skills.
+      </p>
+    </div>
+
+    <h2 id="objectives">Objectives</h2>
+    <div class="card">
+      <ol style="text-align: justify">
+        <li>
+          To apply theoretical concepts from Data Structures and Algorithms
+          (DSA) and Algorithmic Problem Solving (APS) courses to practical,
+          real-world problems within the LinkedIn platform.
+        </li>
+        <li>
+          To address specific business challenges faced by LinkedIn through the
+          application of algorithmic problem-solving.
+        </li>
+        <li>
+          To explore and implement algorithmic solutions that ensure streamlined
+          and efficient services within LinkedIn's ecosystem.
+        </li>
+        <li>
+          To demonstrate the impact of well-chosen data structures and
+          algorithms on improving professional networking services.
+        </li>
+      </ol>
+    </div>
+
+    <h2 id="algorithms">Data Structures and Algorithms Applications</h2>
+
+    <!-- Algorithm 1 -->
+    <div class="card" id="bfs">
+      <div class="algorithm-header">
+        <span class="use-case-number">1</span>
+        <h3>Find & Hire: Targeted Candidate Search</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Graph Algorithms (Graph Traversal, BFS)<br />
+        <strong>Description:</strong> LinkedIn can help recruiters find and hire
+        the right candidates by using graph traversal algorithms like BFS. Each
+        user profile can be represented as a node in a graph, and connections
+        between users as edges. Recruiters can search for candidates based on
+        certain criteria, and BFS can be used to traverse through the
+        connections to find potential candidates who match the job requirements.
+        This enables recruiters to efficiently explore their extended network to
+        find the best fit for their hiring needs.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Managing a large, dynamic graph of user
+        profiles and connections. Ensuring the privacy and security of user data
+        while performing searches. Keeping the search results relevant and
+        personalized based on the recruiter's preferences and job requirements.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/bfs.jpg"
+        alt="BFS Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 3: Breadth-First Search (BFS) <a href="#ref3">[3]</a>
+      </p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Time Complexity:</strong> O(V + E), where V is the number of
+        vertices and E is the number of edges in the graph.<br />
+        - <strong>Space Complexity:</strong> O(V), for storing the queue and the
+        visited list.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Bfs.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View BFS Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 2 -->
+    <div class="card" id="dfs">
+      <div class="algorithm-header">
+        <span class="use-case-number">2</span>
+        <h3>Connection Recommendations</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Graph Algorithms (Graph Traversal, Community
+        Detection)<br />
+        <strong>Description:</strong> LinkedIn can recommend connections to
+        users by analyzing their current connections and suggesting new ones
+        based on mutual connections and shared interests. Graph traversal
+        algorithms like BFS and DFS can be used to explore and find potential
+        connections within a user's network. Community detection algorithms can
+        help identify clusters of users with similar profiles, enhancing the
+        relevance of recommendations by focusing on users with shared
+        professional interests or backgrounds.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Managing large, dynamic graphs; ensuring
+        privacy and security of user data.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/DFS.png"
+        alt="DFS Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 4: Depth-First Search (DFS) <a href="#ref4">[4]</a>
+      </p>
+      <div class="complexity">
+        <strong>DFS Complexity Analysis:</strong><br />
+        - <strong>Time Complexity:</strong> O(V + E)<br />
+        - <strong>Space Complexity:</strong> O(V)
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Dfs.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View DFS Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 3 -->
+    <div class="card" id="trie">
+      <div class="algorithm-header">
+        <span class="use-case-number">3</span>
+        <h3>Job Recommendations</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Trie<br />
+        <strong>Description:</strong> LinkedIn can recommend jobs by storing job
+        titles and user searches in a trie structure, allowing for efficient
+        retrieval of job recommendations based on user input. The trie can
+        quickly match job titles with user search terms, providing relevant job
+        postings in real-time. This ensures that users are presented with job
+        opportunities that closely align with their skills and interests.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Efficiently storing and searching a large
+        number of job titles.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/trie.png"
+        alt="Trie Structure"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 5: Trie Data Structure <a href="#ref5">[5]</a>
+      </p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Insertion:</strong> O(L), where L is the length of the
+        word.<br />
+        - <strong>Search:</strong> O(L), where L is the length of the word.<br />
+        - <strong>Deletion:</strong> O(L), where L is the length of the word.<br />
+        - <strong>Space Complexity:</strong> O(ALPHABET_SIZE × L × N), where
+        ALPHABET_SIZE is the size of the alphabet (e.g., 26 for lowercase
+        English letters), L is the average length of the words, and N is the
+        number of words.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Trie.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Trie Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 4 -->
+    <div class="card" id="skill-endorsements">
+      <div class="algorithm-header">
+        <span class="use-case-number">4</span>
+        <h3>Skill Endorsements and Recommendations</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Association Rule Mining (Using Trie for
+        storing and querying associations)<br />
+        <strong>Description:</strong> LinkedIn can recommend skills to users
+        based on patterns in skills that are often endorsed together. By using a
+        trie to store these associations, the platform can efficiently query and
+        suggest additional skills that complement a user's existing
+        endorsements. This helps users enhance their profiles by adding relevant
+        skills that are valued in their professional network.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Ensuring recommendations are relevant and
+        not overwhelming users with too many suggestions.
+      </div>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Insertion/Search/Delete:</strong> O(L)<br />
+        - <strong>Space Complexity:</strong> O(ALPHABET_SIZE × L × N)
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Trie.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Trie Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 5 -->
+    <div class="card" id="dijkstra">
+      <div class="algorithm-header">
+        <span class="use-case-number">5</span>
+        <h3>Content Personalization</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Dijkstra's Algorithm<br />
+        <strong>Description:</strong> LinkedIn can use Dijkstra's Algorithm to
+        rank content based on the shortest path to user interests and
+        connections. This algorithm helps determine the most relevant articles,
+        posts, and job listings for each user by considering their unique
+        preferences and network. This ensures that users see content that is
+        most pertinent to their professional goals and interests.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Ensuring timely updates to rankings,
+        maintaining relevance and diversity of content.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Dijkstra's.gif"
+        alt="Dijkstra Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 6: Dijkstra's Algorithm <a href="#ref6">[6]</a>
+      </p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Time Complexity:</strong> O(V^2) with a simple implementation,
+        O(E + V log V) with a priority queue or Fibonacci heap, where V is the
+        number of vertices and E is the number of edges.<br />
+        - <strong>Space Complexity:</strong> O(V + E), for storing the graph and
+        additional structures like distance and priority queue.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Dijkstra's.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View Dijkstra's Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 6 -->
+    <div class="card" id="hash-table">
+      <div class="algorithm-header">
+        <span class="use-case-number">6</span>
+        <h3>Personalized Email and Notification Campaigns</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Hash Table (for fast lookup and
+        segmentation)<br />
+        <strong>Description:</strong> LinkedIn can use a hash table to
+        efficiently segment users based on their profiles, behaviors, and
+        preferences. By hashing user attributes (such as job title, industry,
+        activity level, etc.), LinkedIn can quickly categorize users into
+        different segments for targeted email and notification campaigns. Hash
+        tables allow for constant time complexity for both insertion and
+        retrieval operations, making them ideal for handling large datasets and
+        providing fast access to user segments.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Ensuring the hash function is well-designed
+        to minimize collisions and distribute users evenly across the hash
+        table. Managing dynamic updates to user profiles and preferences, which
+        requires efficient rehashing or re-segmentation to keep the data
+        current.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Hashing.gif"
+        alt="Hash Table Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">Figure 7: Hash Table <a href="#ref7">[7]</a></p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Insertion:</strong> O(1), for adding a user to a segment.<br />
+        - <strong>Lookup:</strong> O(1), for retrieving users from a segment.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Hash_table.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Hash Table Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 7 -->
+    <div class="card" id="pagerank">
+      <div class="algorithm-header">
+        <span class="use-case-number">7</span>
+        <h3>Feed Ranking (Prioritizing Posts in User's Feed)</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> PageRank (Graph Algorithm), Priority Queue
+        (Heap)<br />
+        <strong>Description:</strong> LinkedIn's feed ranking system determines
+        the order in which posts appear on a user's feed based on relevance,
+        engagement, and social connections. The algorithms used are PageRank to
+        measure influence of posts based on likes, comments, and shares, and
+        Priority Queue (Max-Heap) to dynamically rank and serve the most
+        relevant posts in real-time. The system considers factors such as user
+        engagement history (likes, comments, shares), post recency (newer posts
+        get higher priority), connection strength (posts from close connections
+        appear first).
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Ensuring real-time updates to reflect new
+        interactions instantly, avoiding bias towards viral content to maintain
+        diversity, and scaling the system to deliver fast, personalized feeds to
+        millions of users efficiently.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Pagerank.gif"
+        alt="PageRank Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 8: PageRank Algorithm in Graphs <a href="#ref8">[8]</a>
+      </p>
+      <div class="complexity">
+        <strong>PageRank Complexity:</strong><br />
+        - <strong>Time Complexity:</strong> O(K × E) per iteration, where K is
+        the number of iterations and E is the number of edges.<br />
+        - <strong>Space Complexity:</strong> O(V + E), where V is the number of
+        vertices (users/posts) and E is the number of edges (interactions).
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Pagerank.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View PageRank Implementation</a
+      >
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Priority_Queue.gif"
+        alt="Priority Queue Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 9: Heap Data Structure <a href="#ref9">[9]</a>
+      </p>
+      <div class="complexity">
+        <strong>Priority Queue (Max-Heap) Complexity:</strong><br />
+        - <strong>Insertion:</strong> O(log N)<br />
+        - <strong>Extraction:</strong> O(log N)<br />
+        - <strong>Peek:</strong> O(1)<br />
+        - <strong>Space Complexity:</strong> O(N) (stores feed items in memory).
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Priority_Queues.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Max-Heap Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 8 -->
+    <div class="card" id="fenwick-tree">
+      <div class="algorithm-header">
+        <span class="use-case-number">8</span>
+        <h3>Tracking Time-based User Engagement</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Fenwick Tree (Binary Indexed Tree)<br />
+        <strong>Description:</strong> LinkedIn can track user engagement (likes,
+        comments, shares) over time to analyze trends and optimize content
+        delivery. A Fenwick Tree (or Binary Indexed Tree) efficiently records
+        engagement metrics in real-time, computes cumulative engagement over any
+        time window (e.g., "How many likes in the past 7 days?") and supports
+        dynamic updates (O(log N)) and range queries (O(log N)). Use cases
+        include detecting trending content by identifying posts with sudden
+        engagement spikes, visualizing user activity through weekly or monthly
+        engagement dashboards, and monitoring ad performance by tracking
+        click-through rates over specific time periods.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> A key challenge is processing millions of
+        interactions per second, demanding low-latency, high-throughput systems.
+        Another is balancing data granularity with storage costs i.e., finer
+        metrics increase insight but also data volume and infrastructure load.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/Fenwick%20Tree.png"
+        alt="Fenwick Tree Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 10: Binary Indexed Tree (Fenwick Tree) <a href="#ref10">[10]</a>
+      </p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Update (Add engagement):</strong> O(log N)<br />
+        - <strong>Query (Get total engagement in range [L, R]):</strong> O(log
+        N)<br />
+        - <strong>Space Complexity:</strong> O(N) (where N is the max time units
+        tracked, e.g., days or hours).
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Fenwick_tree.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Fenwick Tree Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 9 -->
+    <div class="card" id="job-hunting">
+      <div class="algorithm-header">
+        <span class="use-case-number">9</span>
+        <h3>Job Hunting: Apply for Jobs Advertised on LinkedIn</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Trie<br />
+        <strong>Description:</strong> LinkedIn can recommend jobs by storing job
+        titles and user searches in a trie structure. This allows for efficient
+        retrieval of job recommendations based on user input. When a user
+        searches for job titles or keywords, the trie can quickly match and
+        suggest relevant job postings. This helps users find suitable job
+        opportunities more efficiently, improving their job hunting experience
+        on LinkedIn.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Efficiently storing and searching a large
+        number of job titles. Managing the dynamic nature of job postings and
+        searches as new jobs are added and old ones are removed or filled.
+        Ensuring that the recommendations remain relevant and personalized to
+        the user's career interests and skills.
+      </div>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - <strong>Insertion:</strong> O(L), where L is the length of the
+        word.<br />
+        - <strong>Search:</strong> O(L), where L is the length of the word.<br />
+        - <strong>Deletion:</strong> O(L), where L is the length of the word.<br />
+        - <strong>Space Complexity:</strong> O(ALPHABET_SIZE × L × N), where
+        ALPHABET_SIZE is the size of the alphabet (e.g., 26 for lowercase
+        English letters), L is the average length of the words, and N is the
+        number of words.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Trie.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Trie Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 10 -->
+    <div class="card" id="social-selling">
+      <div class="algorithm-header">
+        <span class="use-case-number">10</span>
+        <h3>Social Selling Platform</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Collaborative Filtering and Graph
+        Analysis<br />
+        <strong>Description:</strong> Collaborative filtering can be used to
+        recommend products, services, and potential business connections to
+        users based on their interactions, preferences, and behaviors. By
+        analyzing patterns in user activity, LinkedIn can suggest relevant
+        content and connections to enhance social selling efforts. Graph
+        analysis algorithms can be employed to understand and leverage the
+        network of connections between users and companies. By analyzing these
+        connections, LinkedIn can identify key influencers, potential leads, and
+        the most effective pathways for building business relationships.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Efficiently managing large volumes of user
+        and company data is challenging, while ensuring privacy and compliance
+        with data protection laws is equally critical.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Dijkstra's.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View Dijkstra's Implementation (example for
+        graph analysis)</a
+      >
+    </div>
+
+    <!-- Algorithm 11 -->
+    <div class="card" id="profile-analytics">
+      <div class="algorithm-header">
+        <span class="use-case-number">11</span>
+        <h3>Profile View Analytics</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Fenwick Tree (Binary Indexed Tree) + Graph
+        Algorithms (BFS/DFS for Stalker Detection).<br />
+        <strong>Description:</strong> LinkedIn's "Who Viewed Your Profile"
+        feature allows users to track who visited their profile over time. To
+        implement this case, Fenwick Tree (BIT) can be used to count
+        daily/weekly profile views in O(log N) time per update, answer range
+        queries (e.g., "How many views in the last 30 days?") in O(log N) time
+        and Graph Algorithms (BFS/DFS) help detect stalkers (users who
+        frequently visit but don't connect), influential viewers (high-profile
+        visitors who might signal job opportunities).
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> Handling millions of profile views every
+        second without delays, protecting the privacy of users who want their
+        data anonymized and storing large amounts of historical data efficiently
+        without making the database too large.
+      </div>
+      <div class="complexity">
+        <strong>Fenwick Tree Complexity:</strong><br />
+        - <strong>Update (New View):</strong> O(log N)<br />
+        - <strong>Query (Total Views in Range [L, R]):</strong> O(log N)<br />
+        - <strong>Space Complexity:</strong> O(N) (where N = max time units,
+        e.g., 365 days).
+      </div>
+      <div class="complexity">
+        <strong>BFS/DFS Complexity:</strong><br />
+        - <strong>Time Complexity:</strong> O(V + E), where V is the number of
+        vertices and E is the number of edges in the graph.<br />
+        - <strong>Space Complexity:</strong> O(V), for storing the queue/stack
+        and the visited list.
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Fenwick_tree.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View Fenwick Tree Implementation</a
+      >
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Bfs.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View BFS Implementation</a
+      >
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/Dfs.c"
+        class="btn"
+        ><i class="fas fa-code"></i> View DFS Implementation</a
+      >
+    </div>
+
+    <!-- Algorithm 12 -->
+    <div class="card" id="learning-recommendations">
+      <div class="algorithm-header">
+        <span class="use-case-number">12</span>
+        <h3>Learning Recommendations (LinkedIn Learning)</h3>
+      </div>
+      <p style="text-align: justify">
+        <strong>Algorithm:</strong> Directed Acyclic Graph (DAG), Topological
+        Sort<br />
+        <strong>Description:</strong> LinkedIn Premium recommends personalized
+        learning paths (e.g., "To become a Data Scientist, take these courses in
+        order"). This requires modeling skill dependencies (e.g., "Learn Python
+        before Machine Learning") as a DAG, topological sorting to generate a
+        conflict-free course sequence.
+      </p>
+      <div class="challenge-box">
+        <strong>Challenges:</strong> The key challenges include managing dynamic
+        updates as new courses and skills reshape the DAG, balancing
+        personalization between breadth for exploration and depth for mastery,
+        and addressing the cold-start problem where new users begin without
+        skill or engagement data.
+      </div>
+      <img
+        src="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/assets/DAG_with_Topological_Sort.gif"
+        alt="Topological Sort Visualization"
+        class="algorithm-img"
+      />
+      <p class="caption">
+        Figure 11: Kahn's Algorithm for Topological Sort
+        <a href="#ref11">[11]</a>
+      </p>
+      <div class="complexity">
+        <strong>Complexity Analysis:</strong><br />
+        - Time: O(V + E), where V is the number of nodes (courses/skills) and E
+        is the number of edges (prerequisites/dependencies).<br />
+        - Space: O(V + E)
+      </div>
+      <a
+        href="https://raw.githubusercontent.com/PrajwalMG159/portfolio.github.io/refs/heads/main/codes/DAG_and_Topological_Sort.cpp"
+        class="btn"
+        ><i class="fas fa-code"></i> View DAG and Topological Sort
+        Implementation</a
+      >
+    </div>
+
+    <h2 id="learnings">Learnings and Key Takeaways</h2>
+    <div class="card">
+      <p style="text-align: justify">
+        This portfolio demonstrates how selecting appropriate data structures
+        and algorithms can address specific business challenges across various
+        LinkedIn functionalities. Each use case details the application of
+        suitable algorithms, outlines the challenges, highlights the benefits,
+        and emphasizes design techniques tailored to LinkedIn's services. It
+        shows how algorithms learned in APS and DSA classes can be directly
+        applied to practical problems on LinkedIn and focuses on efficiency and
+        practicality.
+      </p>
+      <p style="text-align: justify">
+        By linking theory to practice, this portfolio provides insights into
+        choosing the best solutions for real-world issues on LinkedIn. It
+        illustrates the significant impact that well-chosen algorithms and data
+        structures can have in improving LinkedIn's services, such as:
+      </p>
+      <ul style="text-align: justify">
+        <li>Optimizing connection recommendations through graph algorithms</li>
+        <li>
+          Enhancing content delivery using Dijkstra's algorithm and PageRank
+        </li>
+        <li>
+          Personalizing job recommendations with efficient trie structures
+        </li>
+        <li>Tracking engagement metrics with Fenwick Trees</li>
+        <li>Creating learning paths with topological sorting</li>
+      </ul>
+      <p style="text-align: justify">
+        The portfolio emphasizes the importance of understanding these concepts
+        to drive innovation and efficiency on LinkedIn, ultimately contributing
+        to a more engaging and effective professional networking platform.
+        Through this project, I've gained valuable experience in applying
+        theoretical knowledge to practical scenarios, analyzing algorithmic
+        trade-offs, and designing solutions that balance performance with
+        real-world constraints.
+      </p>
+    </div>
+
+    <h2 id="references">References</h2>
+    <div class="card">
+      <p id="ref1">
+        [1] LinkedIn.
+        <a
+          href="https://rockcontent.com/blog/what-is-linkedin/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://rockcontent.com/blog/what-is-linkedin/</a
+        >.
+      </p>
+      <p id="ref2">
+        [2] Market Analysis of LinkedIn.
+        <a
+          href="https://www.slideteam.net/linkedin-competitive-analysis-report-business-marketing-using-linkedin-ppt-demonstration.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.slideteam.net/linkedin-competitive-analysis-report-business-marketing-using-linkedin-ppt-demonstration.html</a
+        >.
+      </p>
+      <p id="ref3">
+        [3] Breadth-First Search Traversal.
+        <a
+          href="https://www.freecodecamp.org/news/deep-dive-into-graph-traversals-227a90c6a261/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.freecodecamp.org/news/deep-dive-into-graph-traversals-227a90c6a261/</a
+        >.
+      </p>
+      <p id="ref4">
+        [4] Depth-First Search Traversal.
+        <a
+          href="https://www.geeksforgeeks.org/dfs-traversal-of-a-tree-using-recursion/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.geeksforgeeks.org/dfs-traversal-of-a-tree-using-recursion/</a
+        >.
+      </p>
+      <p id="ref5">
+        [5] Trie - A Tree-based Data Structure.
+        <a
+          href="https://www.polarsparc.com/xhtml/Trie-1.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.polarsparc.com/xhtml/Trie-1.html</a
+        >.
+      </p>
+      <p id="ref6">
+        [6] Graph Traversal Overview.
+        <a
+          href="https://blog.csdn.net/2301_81373791/article/details/144214160"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://blog.csdn.net/2301_81373791/article/details/144214160</a
+        >.
+      </p>
+      <p id="ref7">
+        [7] Hash Table.
+        <a
+          href="https://www.ilmuhacking.com/web-security/hashtable-collision-dos/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.ilmuhacking.com/web-security/hashtable-collision-dos/</a
+        >.
+      </p>
+      <p id="ref8">
+        [8] PageRank Algorithm for Graph Databases.
+        <a
+          href="https://memgraph.com/blog/pagerank-algorithm-for-graph-databases"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://memgraph.com/blog/pagerank-algorithm-for-graph-databases</a
+        >.
+      </p>
+      <p id="ref9">
+        [9] Heap Data Structure Explained.
+        <a
+          href="https://tipsmake.com/heap-data-structure"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://tipsmake.com/heap-data-structure</a
+        >.
+      </p>
+      <p id="ref10">
+        [10] Binary Indexed Tree.
+        <a
+          href="https://www.enjoyalgorithms.com/blog/binary-indexed-tree"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://www.enjoyalgorithms.com/blog/binary-indexed-tree</a
+        >.
+      </p>
+      <p id="ref11">
+        [11] Kahn's Algorithm for Topological Sort.
+        <a
+          href="https://mintuchel.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-kahn-%EC%9C%84%EC%83%81%EC%A0%95%EB%A0%AC"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://mintuchel.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-kahn-%EC%9C%84%EC%83%81%EC%A0%95%EB%A0%AC</a
+        >.
+      </p>
+    </div>
+
+    <footer>
+      <p>
+        © 2025 Prajwal Ganeshanavar |
+        <a
+          href="https://github.com/PrajwalMG159"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fab fa-github"></i> GitHub</a
+        >
+        |
+        <a
+          href="https://www.linkedin.com/in/prajwal-ganeshanavar-55484126a"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fab fa-linkedin"></i> LinkedIn</a
+        >
+        |
+        <a href="#top"><i class="fas fa-arrow-up"></i> Back to Top</a>
+      </p>
+    </footer>
+  </body>
+</html>
